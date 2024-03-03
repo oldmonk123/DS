@@ -1,0 +1,43 @@
+#include<stdio.h> 
+int i,n; 
+struct EMP 
+{ 
+   char emp_name[20]; 
+   int emp_no, basic;  
+   float gross, net_salary, all_allowances, IT; 
+    
+}e[5]; 
+void Readdata() 
+{ 
+ printf("enter how many emps?"); 
+ scanf("%d", &n); 
+  
+  printf("\nemployee name\t   EMP Num\t  Basic sal \n"); 
+  for (i=0;i<n; i++) 
+   scanf("%s%d%d",e[i].emp_name,&e[i].emp_no,&e[i].basic); 
+} 
+void calculate() 
+{ 
+ for (i=0;i<n; i++) 
+ { 
+    e[i].all_allowances=1.23*e[i].basic; 
+   e[i].gross=e[i].basic+e[i].all_allowances; 
+   e[i].IT=0.3*e[i].gross; 
+   e[i].net_salary=e[i].gross-e[i].IT; 
+   
+  }  
+  
+} 
+void Displaydata() 
+{ 
+ printf("Employee Details are : \n"); 
+ printf("Emp Name\t Emp Num\t Basic\t gross\t net_salary\t all_allowances\t IT\n "); 
+ for (i=0;i<n; i++) 
+    printf("%s\t %d\t %d\t %f\t %f\t%f\t%f\n",e[i].emp_name,e[i].emp_no,e[i].basic,e[i].gross, e[i].net_salary,e[i].all_allowances, e[i].IT); 
+}  
+int main() 
+{ 
+ Readdata(); 
+ calculate(); 
+ Displaydata(); 
+}
