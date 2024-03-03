@@ -1,0 +1,124 @@
+#include<stdio.h> 
+#include<stdlib.h> 
+#include<conio.h> 
+struct sll 
+{ 
+ char usn[10]; 
+ struct sll *next; 
+}; 
+typedef struct sll node; 
+node *start=NULL; 
+node *getnode() 
+{ 
+ node *n1; 
+ n1=(node*)malloc(sizeof(node)); 
+ n1->next=NULL; 
+ printf("\n enter the usn\n"); 
+ scanf("%s",&n1->usn); 
+ return n1; 
+} 
+void insert_front() 
+{ 
+ node *n1; 
+ n1=getnode(); 
+ if(start==NULL) 
+ { 
+  start=n1; 
+  return; 
+ } 
+ n1->next=start; 
+ start=n1; 
+} 
+void insert_end() 
+{ 
+ node *n1,*temp=start; 
+ n1=getnode(); 
+ if(start==NULL) 
+ { 
+  start=n1; 
+  return; 
+ } 
+ while(temp->next!=NULL) 
+ temp=temp->next; 
+ temp->next=n1; 
+} 
+void delete_front() 
+{ 
+ node *temp=start; 
+ if(start==NULL) 
+ { 
+  printf("\n the list is empty\n"); 
+  return; 
+ } 
+ start=start->next; 
+ printf("\nthe deleted usn is %s\n",temp->usn); 
+ free(temp); 
+} 
+void delete_end() 
+{ 
+ node *temp=start,*prev; 
+ if(start==NULL) 
+ { 
+  printf("\n the list is empty\n"); 
+  return; 
+ } 
+ if(start->next==NULL) 
+ { 
+  start=NULL; 
+   printf("\nthe deleted usn is %s\n",temp->usn); 
+ free(temp); 
+ return; 
+ } 
+ while(temp->next!=NULL) 
+ { 
+  prev=temp; 
+  temp=temp->next; 
+ } 
+ prev->next=NULL; 
+ printf("\nthe deleted usn is %s\n",temp->usn); 
+ free(temp); 
+} 
+void display() 
+{ 
+ node *temp=start; 
+ int cnt=0; 
+ if(start==NULL) 
+ { 
+  printf("\n the list is empty\n"); 
+  return; 
+ } 
+ printf("\n the elements in the list are\n"); 
+ while(temp!=NULL) 
+ { 
+  printf("%s\n",temp->usn); 
+  temp=temp->next; 
+  cnt++; 
+ } 
+ printf("\n total number of node in the list are %d\n",cnt); 
+} 
+void main() 
+{ 
+ int i,ch,n; 
+ while(1) 
+ { 
+  printf("\nenter the choice\n"); 
+  printf("1.insert front\t2.insert end\t3.delete front\t4.delete end\t5.display\n"); 
+  scanf("%d",&ch); 
+  switch(ch) 
+  { 
+   case 1:printf("enter the n value\n"); 
+    scanf("%d",&n); 
+    for(i=0;i<n;i++) 
+    { 
+        insert_front(); 
+    } 
+    break; 
+   case 2:insert_end();break; 
+   case 3:delete_front();break; 
+   case 4:delete_end();break; 
+   case 5:display();break; 
+   default:printf("\n enter the correct choice\n"); 
+   break; 
+  } 
+ } 
+}
